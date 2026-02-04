@@ -5,7 +5,7 @@
 ![Daemon Process](https://img.shields.io/badge/Daemon-Process-green?style=for-the-badge)
 ![C++ Language](https://img.shields.io/badge/Language-C++-red?style=for-the-badge)
 
-*Un daemon de comunicación con capacidades de shell remoto*
+*A communication daemon with remote shell capabilities*
 
 </div>
 
@@ -15,306 +15,308 @@
 
 # Matt Daemon
 
-## 🎯 Descripción
+[README en Español](README_es.md)
 
-`Matt Daemon` es un proyecto de `42 School` que implementa un daemon completo de comunicación por red. Este daemon funciona como un servicio en segundo plano que escucha en un puerto específico, registra todas las actividades en archivos de log y proporciona capacidades avanzadas de comunicación segura. El proyecto incluye tanto un cliente de shell remoto como un cliente gráfico para gestión de logs.
+## 🎯 Description
 
-## ✨ Características
+`Matt Daemon` is a `42 School` project that implements a complete network communication daemon. This daemon runs as a background service that listens on a specific port, logs all activity to log files, and provides advanced secure communication capabilities. The project includes both a remote shell client and a GUI client for log management.
 
-- **Daemon Real**: Proceso que se ejecuta en segundo plano sin intervención del usuario
-- **Comunicación de Red**: Comunicación segura en red con encriptación
-- **Sistema de Logging**: Gestión completa de logs con rotación automática
-- **Control de Instancias**: Solo permite una instancia ejecutándose simultáneamente
-- **Gestión de Señales**: Intercepta y maneja señales del sistema correctamente
-- **Control de Timeout**: Gestión de conexiones inactivas
-- **Multi-Cliente**: Permite conexiones simultáneas (por defecto: 3)
-- **Shell Interactivo**: Acceso completo a shell remoto (Ben_AFK)
-- **Cliente Gráfico**: Interfaz GTK para visualización y envío de logs (Casey_AFK)
+## ✨ Features
 
-## 🔧 Instalación
+- **Real Daemon**: Process that runs in the background without user interaction
+- **Network Communication**: Secure network communication with encryption
+- **Logging System**: Full log management with automatic rotation
+- **Instance Control**: Allows only one instance running at a time
+- **Signal Management**: Intercepts and handles system signals properly
+- **Timeout Control**: Inactive connection management
+- **Multi-Client**: Allows simultaneous connections (default: 3)
+- **Interactive Shell**: Full remote shell access (Ben_AFK)
+- **GUI Client**: GTK interface for viewing and sending logs (Casey_AFK)
+
+## 🔧 Installation
 
 ```bash
 git clone https://github.com/Kobayashi82/MattDaemon.git
 cd MattDaemon
 make
 
-# Ejecutables generados en la carpeta bin/:
-# MattDaemon    - El daemon principal
-# Ben_AFK       - Cliente de shell remoto
-# Casey_AFK     - Cliente gráfico de logs
+# Binaries generated in the bin/ folder:
+# MattDaemon    - Main daemon
+# Ben_AFK       - Remote shell client
+# Casey_AFK     - GUI log client
 
-# Dependencias para Casey_AFK
+# Dependencies for Casey_AFK
 sudo apt-get install libgtk-3-dev
 ```
 
-## 🖥️ Uso
+## 🖥️ Usage
 
-### Ejecución del Daemon
+### Running the Daemon
 
-#### Opciones disponibles:
+#### Available options:
 
-- `-k, --disable-encryption`: Deshabilitar encriptación para clientes Ben_AFK
-- `-s, --disable-shell`: Deshabilitar acceso a shell remoto
-- `-c, --max-clients=NUM`: Número máximo de clientes (por defecto: 3, ilimitado = 0)
-- `-p, --port=PORT`: Puerto de escucha (por defecto: 4242)
-- `-t, --timeout=SECOND`: Timeout para conexiones inactivas en segundos (por defecto: 600)
-- `-f, --log-file=PATH`: Ruta del archivo de log
-- `-l, --log-level=LEVEL`: Nivel de logging (DEBUG, INFO, LOG, WARNING, ERROR, CRITICAL)
-- `-n, --log-new`: Crear nuevo archivo de log al iniciar
-- `-m, --log-rotate-max=NUM`: Máximo número de archivos de log en rotación (por defecto: 5)
-- `-r, --log-rotate-size=BYTE`: Tamaño mínimo para rotación de logs (por defecto: 10MB)
-- `-x, --shell-path=PATH`: Ruta del shell a ejecutar
-- `-h, --help`: Mostrar ayuda
-- `-u, --usage`: Mostrar sintaxis
-- `-V, --version`: Mostrar versión
+- `-k, --disable-encryption`: Disable encryption for Ben_AFK clients
+- `-s, --disable-shell`: Disable remote shell access
+- `-c, --max-clients=NUM`: Maximum number of clients (default: 3, unlimited = 0)
+- `-p, --port=PORT`: Listening port (default: 4242)
+- `-t, --timeout=SECOND`: Timeout for inactive connections in seconds (default: 600)
+- `-f, --log-file=PATH`: Log file path
+- `-l, --log-level=LEVEL`: Logging level (DEBUG, INFO, LOG, WARNING, ERROR, CRITICAL)
+- `-n, --log-new`: Create a new log file on start
+- `-m, --log-rotate-max=NUM`: Maximum number of log files in rotation (default: 5)
+- `-r, --log-rotate-size=BYTE`: Minimum size for log rotation (default: 10MB)
+- `-x, --shell-path=PATH`: Shell path to execute
+- `-h, --help`: Show help
+- `-u, --usage`: Show syntax
+- `-V, --version`: Show version
 
-#### Uso básico:
+#### Basic usage:
 
 ```bash
-# Ejecutar con configuración por defecto
+# Run with default configuration
 sudo ./MattDaemon
 
-# Ejecutar en puerto personalizado
+# Run on a custom port
 sudo ./MattDaemon --port 1234
 
-# Ejecutar con máximo 5 clientes
+# Run with max 5 clients
 sudo ./MattDaemon --max-clients 3
 
-# Deshabilitar encriptación
+# Disable encryption
 sudo ./MattDaemon --disable-encryption
 
-# Deshabilitar shell remoto
+# Disable remote shell
 sudo ./MattDaemon --disable-shell
 ```
 
-#### Opciones avanzadas:
+#### Advanced options:
 
 ```bash
-# Configurar archivo de log y nivel de registro
+# Configure log file and logging level
 sudo ./MattDaemon --log-file /var/log/my_daemon.log --log-level DEBUG
 
-# Configurar rotación de logs
+# Configure log rotation
 sudo ./MattDaemon --log-rotate-max 10 --log-rotate-size 52428800
 
-# Usar shell personalizado
+# Use a custom shell
 sudo ./MattDaemon --shell-path /bin/fish
 
-# Configurar timeout de conexión (en segundos)
+# Configure connection timeout (in seconds)
 sudo ./MattDaemon --timeout 1800
 ```
 
-#### Verificar estado:
+#### Check status:
 
 ```bash
-# Verificar que está ejecutándose
+# Verify it is running
 ps aux | grep MattDaemon
 sudo ls -la /var/lock/ | grep matt
 
-# Ver logs en tiempo real
+# View logs in real time
 sudo tail -f /var/log/matt_daemon/matt_daemon.log
 ```
 
-#### Conexión Básica
+#### Basic connection
 
 ```bash
-# Conexión simple con netcat
+# Simple connection with netcat
 nc localhost 4242
 
-# Enviar mensajes (se guardan en log)
+# Send messages (saved to logs)
 Hello World
-Mensaje de prueba
+Test message
 
-# Terminar daemon
+# Terminate daemon
 quit
 ```
 
-### Ejecución de Ben_AFK (Shell Remoto)
+### Running Ben_AFK (Remote Shell)
 
-#### Opciones disponibles:
+#### Available options:
 
-- `-k, --insecure`: Permitir comunicación no encriptada
-- `-l, --login=USERNAME`: Especificar nombre de usuario
-- `-p, --port=PORT`: Puerto de conexión (por defecto: 4242)
-- `-h, --help`: Mostrar ayuda
-- `-u, --usage`: Mostrar sintaxis
-- `-V, --version`: Mostrar versión
+- `-k, --insecure`: Allow unencrypted communication
+- `-l, --login=USERNAME`: Specify username
+- `-p, --port=PORT`: Connection port (default: 4242)
+- `-h, --help`: Show help
+- `-u, --usage`: Show syntax
+- `-V, --version`: Show version
 
-#### Uso básico:
+#### Basic usage:
 
 ```bash
-# Conexión básica (usuario actual, puerto por defecto)
+# Basic connection (current user, default port)
 ./Ben_AFK localhost
 
-# Especificar usuario
+# Specify user
 ./Ben_AFK --login admin localhost
 
-# Usuario en formato user@host
+# User in user@host format
 ./Ben_AFK admin@localhost
 
-# Puerto personalizado
+# Custom port
 ./Ben_AFK --port 1234 localhost
 
-# Permitir comunicación no encriptada
+# Allow unencrypted communication
 ./Ben_AFK --insecure localhost
 
-# Combinando opciones
+# Combining options
 ./Ben_AFK --login admin --port 1234 --insecure localhost
 ```
 
-### Ejecución de Casey_AFK (Cliente Gráfico)
+### Running Casey_AFK (GUI Client)
 
-#### Características:
+#### Features:
 
-- **Interfaz Gráfica**: Cliente GTK para gestión visual de logs
-- **Conexión Intuitiva**: Interfaz simple para conectar al daemon
-- **Visualización de Logs**: Recibe y muestra los últimos logs del servidor
-- **Envío de Mensajes**: Permite enviar logs personalizados al daemon
-- **Control Remoto**: Capacidad de cerrar el daemon desde la interfaz
+- **Graphical Interface**: GTK client for visual log management
+- **Intuitive Connection**: Simple interface to connect to the daemon
+- **Log Visualization**: Receives and displays the latest server logs
+- **Message Sending**: Allows sending custom logs to the daemon
+- **Remote Control**: Ability to shut down the daemon from the interface
 
-#### Uso básico:
+#### Basic usage:
 
 ```bash
-# Ejecutar cliente gráfico
+# Run the GUI client
 ./Casey_AFK
 
-# El programa abrirá una ventana con campos para:
-# - Host:    dirección del servidor (ej: localhost)
-# - Puerto:  puerto de conexión (por defecto: 4242)  
-# - Usuario: nombre de usuario para identificación
+# The program will open a window with fields for:
+# - Host:    server address (e.g., localhost)
+# - Port:    connection port (default: 4242)
+# - User:    username for identification
 ```
 
-#### Funcionalidades de la interfaz:
+#### Interface features:
 
-- **Conectar**: Establece conexión con el daemon y recibe logs recientes
-- **Campo de Mensaje**: Área de texto para escribir mensajes personalizados
-- **Enviar Log**: Botón para enviar el mensaje al daemon como entrada de log
-- **Cerrar Servidor**: Botón para enviar la órden de cierre al daemon
-- **Desconectar**: Finaliza la conexión con el daemon
-- **Área de Logs**: Ventana que muestra los logs recibidos del servidor
+- **Connect**: Establishes connection to the daemon and receives recent logs
+- **Message Field**: Text area to write custom messages
+- **Send Log**: Button to send the message to the daemon as a log entry
+- **Close Server**: Button to send a shutdown command to the daemon
+- **Disconnect**: Ends the connection with the daemon
+- **Logs Area**: Window that displays logs received from the server
 
-#### Flujo de trabajo típico:
+#### Typical workflow:
 
 ```bash
-1. Ejecutar el daemon: sudo ./MattDaemon
-2. Abrir Casey_AFK: ./Casey_AFK
-3. Introducir datos de conexión (localhost, 4242, tu_usuario)
-4. Hacer clic en "Conectar"
-5. Ver los logs existentes en el área de visualización
-6. Enviar mensajes usando el campo de texto
-7. Cerrar servidor remotamente si es necesario
+1. Run the daemon: sudo ./MattDaemon
+2. Open Casey_AFK: ./Casey_AFK
+3. Enter connection data (localhost, 4242, your_user)
+4. Click "Connect"
+5. See existing logs in the display area
+6. Send messages using the text field
+7. Close the server remotely if needed
 ```
 
 ## 🧪 Testing
 
-### Pruebas Básicas
+### Basic tests
 
 ```bash
-# Test de instancia única
+# Single-instance test
 sudo ./MattDaemon
-sudo ./MattDaemon  # Debería mostrar error de archivo bloqueado
+sudo ./MattDaemon  # Should show a locked-file error
 
-# Test de límite de clientes (por defecto 3)
+# Client limit test (default 3)
 nc localhost 4242 &
 nc localhost 4242 &
 nc localhost 4242 &
-nc localhost 4242   # El cuarto debería rechazarse
+nc localhost 4242   # The fourth should be rejected
 
-# Test con límite personalizado
+# Test with custom limit
 sudo ./MattDaemon --max-clients 1
 nc localhost 4242 &
-nc localhost 4242   # El segundo debería rechazarse
+nc localhost 4242   # The second should be rejected
 ```
 
-### Pruebas de Señales
+### Signal tests
 
 ```bash
-# Ejecutar daemon
+# Run daemon
 sudo ./MattDaemon && PID=$(pgrep MattDaemon)
 sudo kill -15 $PID  # SIGTERM
 
-# Verificar logs
+# Check logs
 sudo tail /var/log/matt_daemon/matt_daemon.log
 
-# Repetir con diferentes señales
+# Repeat with different signals
 sudo kill -2 $PID   # SIGINT
 sudo kill -1 $PID   # SIGHUP
 ```
 
-### Pruebas de Logging
+### Logging tests
 
 ```bash
-# Test de rotación de logs
+# Log rotation test
 sudo ./MattDaemon --log-rotate-size 10 --log-rotate-max 3
 nc localhost 4242
-# Enviar mensajes...
+# Send messages...
 
-# Test de niveles de log
+# Log levels test
 sudo ./MattDaemon --log-level DEBUG
 sudo ./MattDaemon --log-level LOG
 
-# Test de archivo de log personalizado
+# Custom log file test
 sudo ./MattDaemon --log-file /tmp/test_daemon.log
 ```
 
-### Pruebas de Ben_AFK (Shell Remoto)
+### Ben_AFK tests (Remote Shell)
 
 ```bash
-# Test de conexión básica
+# Basic connection test
 ./Ben_AFK localhost
 
-# Test con usuario específico
+# Test with specific user
 ./Ben_AFK --login user localhost
 
-# Test con puerto personalizado
+# Test with custom port
 sudo ./MattDaemon --port 1234
 ./Ben_AFK --port 1234 localhost
 
-# Test de comunicación no encriptada
+# Test unencrypted communication
 sudo ./MattDaemon --disable-encryption
 ./Ben_AFK --insecure localhost
 ```
 
-### Pruebas de Casey_AFK (Cliente Gráfico)
+### Casey_AFK tests (GUI Client)
 
 ```bash
-# Test de interfaz gráfica
+# GUI interface test
 ./Casey_AFK
-# Verificar que la ventana se abre correctamente
+# Check that the window opens correctly
 
-# Test de conexión básica
+# Basic connection test
 sudo ./MattDaemon --log-level DEBUG
 ./Casey_AFK
-# Conectar usando localhost:4242
+# Connect using localhost:4242
 
-# Test de envío de logs
-# 1. Conectar con Casey_AFK
-# 2. Escribir mensaje en el campo de texto
-# 3. Hacer clic en "Enviar Log"
-# 4. Verificar en los logs del daemon
+# Log sending test
+# 1. Connect with Casey_AFK
+# 2. Write a message in the text field
+# 3. Click "Send Log"
+# 4. Check the daemon logs
 
-# Test de visualización de logs
-# 1. Enviar varios mensajes con nc o Ben_AFK
-# 2. Conectar con Casey_AFK
-# 3. Verificar que los logs aparecen en la interfaz
+# Log visualization test
+# 1. Send several messages with nc or Ben_AFK
+# 2. Connect with Casey_AFK
+# 3. Verify logs appear in the interface
 
-# Test de cierre remoto
+# Remote shutdown test
 ./Casey_AFK
-# 1. Conectar al daemon
-# 2. Hacer clic en "Cerrar Servidor"
-# 3. Verificar que el daemon termina correctamente
+# 1. Connect to the daemon
+# 2. Click "Close Server"
+# 3. Verify the daemon stops correctly
 
-# Test con puerto personalizado
+# Test with custom port
 sudo ./MattDaemon --port 1234
 ./Casey_AFK
-# Cambiar puerto a 1234 en la interfaz y conectar
+# Change port to 1234 in the interface and connect
 
-# Test de manejo de errores
+# Error handling test
 ./Casey_AFK
-# Intentar conectar sin daemon ejecutándose
-# Verificar que muestra error apropiado
+# Try connecting without the daemon running
+# Verify it shows an appropriate error
 ```
 
-## 📝 Ejemplos de Log
+## 📝 Log examples
 
 ```
 [18/08/2025-20:49:54]      [ DEBU ]   Daemon: Initiating
@@ -352,53 +354,53 @@ sudo ./MattDaemon --port 1234
 [18/08/2025-20:50:38]      [ INFO ]   Daemon: Closed
 ```
 
-## 🏗️ Arquitectura Técnica
+## 🏗️ Technical Architecture
 
-### Estructura del Daemon
-- **Fork**: Creación doble del proceso hijo para garantizar independencia del terminal
-- **Chdir**: Cambio al directorio raíz del sistema
-- **Flock**: Bloqueo de archivo para control de instancias únicas
-- **Signal**: Manejo de señales del sistema (SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGPIPE, SIGSEV, SIGCHLD)
+### Daemon structure
+- **Fork**: Double child process creation to guarantee terminal independence
+- **Chdir**: Change to the system root directory
+- **Flock**: File lock for single-instance control
+- **Signal**: System signal handling (SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGPIPE, SIGSEV, SIGCHLD)
 
-### Comunicación de Red
-- **Puerto**: 4242 (configurable)
-- **Protocolo**: TCP/IP
-- **Conexiones**: Máximo de conexiones simultáneas (configurable)
-- **Timeout**: Control de conexiones inactivas (configurable)
+### Network communication
+- **Port**: 4242 (configurable)
+- **Protocol**: TCP/IP
+- **Connections**: Maximum simultaneous connections (configurable)
+- **Timeout**: Inactive connection control (configurable)
 
-### Sistema de Encriptación
-- **Encriptación**: Cifrado XOR con clave repetida
-- **Cliente Seguro**: Ben_AFK soporta comunicación encriptada
-- **Negociación**: Automática entre cliente y servidor
+### Encryption system
+- **Encryption**: XOR cipher with repeated key
+- **Secure Client**: Ben_AFK supports encrypted communication
+- **Negotiation**: Automatic between client and server
 
-### Sistema de Logging
-- **Niveles**: DEBUG, INFO, LOG, WARNING, ERROR, CRITICAL
-- **Rotación**: Automática basada en tamaño y cantidad de archivos
-- **Ubicación**: Configurable (por defecto: /var/log/matt_daemon/matt_daemon.log)
+### Logging system
+- **Levels**: DEBUG, INFO, LOG, WARNING, ERROR, CRITICAL
+- **Rotation**: Automatic based on size and number of files
+- **Location**: Configurable (default: /var/log/matt_daemon/matt_daemon.log)
 
-### Cliente Gráfico Casey_AFK
+### Casey_AFK GUI client
 - **Framework**: GTK 3
-- **Funcionalidades**: Visualización de logs, envío de mensajes, control remoto
-- **Compatibilidad**: Linux con entorno gráfico
+- **Features**: Log visualization, message sending, remote control
+- **Compatibility**: Linux with a graphical environment
 
-### Errores Comunes
-- **Permisos insuficientes**: El daemon requiere permisos de root
-- **Puerto ocupado**: Verificar que el puerto especificado esté libre
-- **Archivo bloqueado**: Solo una instancia puede ejecutarse
-- **Host desconocido**: Verificar que el hostname/IP sea válido (Ben_AFK/Casey_AFK)
-- **Dependencias GTK**: Casey_AFK requiere librerías GTK instaladas
-- **Servidor X no disponible**: Casey_AFK necesita entorno gráfico
+### Common errors
+- **Insufficient permissions**: The daemon requires root permissions
+- **Port in use**: Verify the specified port is free
+- **Locked file**: Only one instance can run
+- **Unknown host**: Verify the hostname/IP is valid (Ben_AFK/Casey_AFK)
+- **GTK dependencies**: Casey_AFK requires GTK libraries installed
+- **X server unavailable**: Casey_AFK needs a graphical environment
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está licenciado bajo la WTFPL – [Do What the Fuck You Want to Public License](http://www.wtfpl.net/about/).
+This project is licensed under the WTFPL – [Do What the Fuck You Want to Public License](http://www.wtfpl.net/about/).
 
 ---
 
 <div align="center">
 
-**👹 Desarrollado como parte del curriculum de 42 School 👹**
+**👹 Developed as part of the 42 School curriculum 👹**
 
-*"Because background processes need style too... and a GUI"*
+"*Because background processes need style too... and a GUI"*
 
 </div>
