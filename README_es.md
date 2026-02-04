@@ -17,21 +17,19 @@
 
 [README in English](README.md)
 
-## 🎯 Descripción
-
 `Matt Daemon` es un proyecto de `42 School` que implementa un daemon completo de comunicación por red. Este daemon funciona como un servicio en segundo plano que escucha en un puerto específico, registra todas las actividades en archivos de log y proporciona capacidades avanzadas de comunicación segura. El proyecto incluye tanto un cliente de shell remoto como un cliente gráfico para gestión de logs.
 
 ## ✨ Características
 
-- **Daemon Real**: Proceso que se ejecuta en segundo plano sin intervención del usuario
-- **Comunicación de Red**: Comunicación segura en red con encriptación
-- **Sistema de Logging**: Gestión completa de logs con rotación automática
-- **Control de Instancias**: Solo permite una instancia ejecutándose simultáneamente
-- **Gestión de Señales**: Intercepta y maneja señales del sistema correctamente
-- **Control de Timeout**: Gestión de conexiones inactivas
-- **Multi-Cliente**: Permite conexiones simultáneas (por defecto: 3)
-- **Shell Interactivo**: Acceso completo a shell remoto (Ben_AFK)
-- **Cliente Gráfico**: Interfaz GTK para visualización y envío de logs (Casey_AFK)
+- `Daemon Real`: Proceso que se ejecuta en segundo plano sin intervención del usuario
+- `Comunicación de Red`: Comunicación segura en red con encriptación
+- `Sistema de Logging`: Gestión completa de logs con rotación automática
+- `Control de Instancias`: Solo permite una instancia ejecutándose simultáneamente
+- `Gestión de Señales`: Intercepta y maneja señales del sistema correctamente
+- `Control de Timeout`: Gestión de conexiones inactivas
+- `Multi-Cliente`: Permite conexiones simultáneas (por defecto: 3)
+- `Shell Interactivo`: Acceso completo a shell remoto (Ben_AFK)
+- `Cliente Gráfico`: Interfaz GTK para visualización y envío de logs (Casey_AFK)
 
 ## 🔧 Instalación
 
@@ -167,11 +165,11 @@ quit
 
 #### Características:
 
-- **Interfaz Gráfica**: Cliente GTK para gestión visual de logs
-- **Conexión Intuitiva**: Interfaz simple para conectar al daemon
-- **Visualización de Logs**: Recibe y muestra los últimos logs del servidor
-- **Envío de Mensajes**: Permite enviar logs personalizados al daemon
-- **Control Remoto**: Capacidad de cerrar el daemon desde la interfaz
+- `Interfaz Gráfica`: Cliente GTK para gestión visual de logs
+- `Conexión Intuitiva`: Interfaz simple para conectar al daemon
+- `Visualización de Logs`: Recibe y muestra los últimos logs del servidor
+- `Envío de Mensajes`: Permite enviar logs personalizados al daemon
+- `Control Remoto`: Capacidad de cerrar el daemon desde la interfaz
 
 #### Uso básico:
 
@@ -187,12 +185,12 @@ quit
 
 #### Funcionalidades de la interfaz:
 
-- **Conectar**: Establece conexión con el daemon y recibe logs recientes
-- **Campo de Mensaje**: Área de texto para escribir mensajes personalizados
-- **Enviar Log**: Botón para enviar el mensaje al daemon como entrada de log
-- **Cerrar Servidor**: Botón para enviar la órden de cierre al daemon
-- **Desconectar**: Finaliza la conexión con el daemon
-- **Área de Logs**: Ventana que muestra los logs recibidos del servidor
+- `Conectar`: Establece conexión con el daemon y recibe logs recientes
+- `Campo de Mensaje`: Área de texto para escribir mensajes personalizados
+- `Enviar Log`: Botón para enviar el mensaje al daemon como entrada de log
+- `Cerrar Servidor`: Botón para enviar la órden de cierre al daemon
+- `Desconectar`: Finaliza la conexión con el daemon
+- `Área de Logs`: Ventana que muestra los logs recibidos del servidor
 
 #### Flujo de trabajo típico:
 
@@ -357,39 +355,39 @@ sudo ./MattDaemon --port 1234
 ## 🏗️ Arquitectura Técnica
 
 ### Estructura del Daemon
-- **Fork**: Creación doble del proceso hijo para garantizar independencia del terminal
-- **Chdir**: Cambio al directorio raíz del sistema
-- **Flock**: Bloqueo de archivo para control de instancias únicas
-- **Signal**: Manejo de señales del sistema (SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGPIPE, SIGSEV, SIGCHLD)
+- `Fork`: Creación doble del proceso hijo para garantizar independencia del terminal
+- `Chdir`: Cambio al directorio raíz del sistema
+- `Flock`: Bloqueo de archivo para control de instancias únicas
+- `Signal`: Manejo de señales del sistema (SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGPIPE, SIGSEV, SIGCHLD)
 
 ### Comunicación de Red
-- **Puerto**: 4242 (configurable)
-- **Protocolo**: TCP/IP
-- **Conexiones**: Máximo de conexiones simultáneas (configurable)
-- **Timeout**: Control de conexiones inactivas (configurable)
+- `Puerto`: 4242 (configurable)
+- `Protocolo`: TCP/IP
+- `Conexiones`: Máximo de conexiones simultáneas (configurable)
+- `Timeout`: Control de conexiones inactivas (configurable)
 
 ### Sistema de Encriptación
-- **Encriptación**: Cifrado XOR con clave repetida
-- **Cliente Seguro**: Ben_AFK soporta comunicación encriptada
-- **Negociación**: Automática entre cliente y servidor
+- `Encriptación`: Cifrado XOR con clave repetida
+- `Cliente Seguro`: Ben_AFK soporta comunicación encriptada
+- `Negociación`: Automática entre cliente y servidor
 
 ### Sistema de Logging
-- **Niveles**: DEBUG, INFO, LOG, WARNING, ERROR, CRITICAL
-- **Rotación**: Automática basada en tamaño y cantidad de archivos
-- **Ubicación**: Configurable (por defecto: /var/log/matt_daemon/matt_daemon.log)
+- `Niveles`: DEBUG, INFO, LOG, WARNING, ERROR, CRITICAL
+- `Rotación`: Automática basada en tamaño y cantidad de archivos
+- `Ubicación`: Configurable (por defecto: /var/log/matt_daemon/matt_daemon.log)
 
 ### Cliente Gráfico Casey_AFK
-- **Framework**: GTK 3
-- **Funcionalidades**: Visualización de logs, envío de mensajes, control remoto
-- **Compatibilidad**: Linux con entorno gráfico
+- `Framework`: GTK 3
+- `Funcionalidades`: Visualización de logs, envío de mensajes, control remoto
+- `Compatibilidad`: Linux con entorno gráfico
 
 ### Errores Comunes
-- **Permisos insuficientes**: El daemon requiere permisos de root
-- **Puerto ocupado**: Verificar que el puerto especificado esté libre
-- **Archivo bloqueado**: Solo una instancia puede ejecutarse
-- **Host desconocido**: Verificar que el hostname/IP sea válido (Ben_AFK/Casey_AFK)
-- **Dependencias GTK**: Casey_AFK requiere librerías GTK instaladas
-- **Servidor X no disponible**: Casey_AFK necesita entorno gráfico
+- `Permisos insuficientes`: El daemon requiere permisos de root
+- `Puerto ocupado`: Verificar que el puerto especificado esté libre
+- `Archivo bloqueado`: Solo una instancia puede ejecutarse
+- `Host desconocido`: Verificar que el hostname/IP sea válido (Ben_AFK/Casey_AFK)
+- `Dependencias GTK`: Casey_AFK requiere librerías GTK instaladas
+- `Servidor X no disponible`: Casey_AFK necesita entorno gráfico
 
 ## 📄 Licencia
 

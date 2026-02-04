@@ -17,21 +17,19 @@
 
 [README en Español](README_es.md)
 
-## 🎯 Description
-
 `Matt Daemon` is a `42 School` project that implements a complete network communication daemon. This daemon runs as a background service that listens on a specific port, logs all activity to log files, and provides advanced secure communication capabilities. The project includes both a remote shell client and a GUI client for log management.
 
 ## ✨ Features
 
-- **Real Daemon**: Process that runs in the background without user interaction
-- **Network Communication**: Secure network communication with encryption
-- **Logging System**: Full log management with automatic rotation
-- **Instance Control**: Allows only one instance running at a time
-- **Signal Management**: Intercepts and handles system signals properly
-- **Timeout Control**: Inactive connection management
-- **Multi-Client**: Allows simultaneous connections (default: 3)
-- **Interactive Shell**: Full remote shell access (Ben_AFK)
-- **GUI Client**: GTK interface for viewing and sending logs (Casey_AFK)
+- `Real Daemon`: Process that runs in the background without user interaction
+- `Network Communication`: Secure network communication with encryption
+- `Logging System`: Full log management with automatic rotation
+- `Instance Control`: Allows only one instance running at a time
+- `Signal Management`: Intercepts and handles system signals properly
+- `Timeout Control`: Inactive connection management
+- `Multi-Client`: Allows simultaneous connections (default: 3)
+- `Interactive Shell`: Full remote shell access (Ben_AFK)
+- `GUI Client`: GTK interface for viewing and sending logs (Casey_AFK)
 
 ## 🔧 Installation
 
@@ -167,11 +165,11 @@ quit
 
 #### Features:
 
-- **Graphical Interface**: GTK client for visual log management
-- **Intuitive Connection**: Simple interface to connect to the daemon
-- **Log Visualization**: Receives and displays the latest server logs
-- **Message Sending**: Allows sending custom logs to the daemon
-- **Remote Control**: Ability to shut down the daemon from the interface
+- `Graphical Interface`: GTK client for visual log management
+- `Intuitive Connection`: Simple interface to connect to the daemon
+- `Log Visualization`: Receives and displays the latest server logs
+- `Message Sending`: Allows sending custom logs to the daemon
+- `Remote Control`: Ability to shut down the daemon from the interface
 
 #### Basic usage:
 
@@ -187,12 +185,12 @@ quit
 
 #### Interface features:
 
-- **Connect**: Establishes connection to the daemon and receives recent logs
-- **Message Field**: Text area to write custom messages
-- **Send Log**: Button to send the message to the daemon as a log entry
-- **Close Server**: Button to send a shutdown command to the daemon
-- **Disconnect**: Ends the connection with the daemon
-- **Logs Area**: Window that displays logs received from the server
+- `Connect`: Establishes connection to the daemon and receives recent logs
+- `Message Field`: Text area to write custom messages
+- `Send Log`: Button to send the message to the daemon as a log entry
+- `Close Server`: Button to send a shutdown command to the daemon
+- `Disconnect`: Ends the connection with the daemon
+- `Logs Area`: Window that displays logs received from the server
 
 #### Typical workflow:
 
@@ -357,39 +355,39 @@ sudo ./MattDaemon --port 1234
 ## 🏗️ Technical Architecture
 
 ### Daemon structure
-- **Fork**: Double child process creation to guarantee terminal independence
-- **Chdir**: Change to the system root directory
-- **Flock**: File lock for single-instance control
-- **Signal**: System signal handling (SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGPIPE, SIGSEV, SIGCHLD)
+- `Fork`: Double child process creation to guarantee terminal independence
+- `Chdir`: Change to the system root directory
+- `Flock`: File lock for single-instance control
+- `Signal`: System signal handling (SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGPIPE, SIGSEV, SIGCHLD)
 
 ### Network communication
-- **Port**: 4242 (configurable)
-- **Protocol**: TCP/IP
-- **Connections**: Maximum simultaneous connections (configurable)
-- **Timeout**: Inactive connection control (configurable)
+- `Port`: 4242 (configurable)
+- `Protocol`: TCP/IP
+- `Connections`: Maximum simultaneous connections (configurable)
+- `Timeout`: Inactive connection control (configurable)
 
 ### Encryption system
-- **Encryption**: XOR cipher with repeated key
-- **Secure Client**: Ben_AFK supports encrypted communication
-- **Negotiation**: Automatic between client and server
+- `Encryption`: XOR cipher with repeated key
+- `Secure Client`: Ben_AFK supports encrypted communication
+- `Negotiation`: Automatic between client and server
 
 ### Logging system
-- **Levels**: DEBUG, INFO, LOG, WARNING, ERROR, CRITICAL
-- **Rotation**: Automatic based on size and number of files
-- **Location**: Configurable (default: /var/log/matt_daemon/matt_daemon.log)
+- `Levels`: DEBUG, INFO, LOG, WARNING, ERROR, CRITICAL
+- `Rotation`: Automatic based on size and number of files
+- `Location`: Configurable (default: /var/log/matt_daemon/matt_daemon.log)
 
 ### Casey_AFK GUI client
-- **Framework**: GTK 3
-- **Features**: Log visualization, message sending, remote control
-- **Compatibility**: Linux with a graphical environment
+- `Framework`: GTK 3
+- `Features`: Log visualization, message sending, remote control
+- `Compatibility`: Linux with a graphical environment
 
 ### Common errors
-- **Insufficient permissions**: The daemon requires root permissions
-- **Port in use**: Verify the specified port is free
-- **Locked file**: Only one instance can run
-- **Unknown host**: Verify the hostname/IP is valid (Ben_AFK/Casey_AFK)
-- **GTK dependencies**: Casey_AFK requires GTK libraries installed
-- **X server unavailable**: Casey_AFK needs a graphical environment
+- `Insufficient permissions`: The daemon requires root permissions
+- `Port in use`: Verify the specified port is free
+- `Locked file`: Only one instance can run
+- `Unknown host`: Verify the hostname/IP is valid (Ben_AFK/Casey_AFK)
+- `GTK dependencies`: Casey_AFK requires GTK libraries installed
+- `X server unavailable`: Casey_AFK needs a graphical environment
 
 ## 📄 License
 
