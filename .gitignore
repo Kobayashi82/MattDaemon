@@ -4,6 +4,10 @@
 .vscode/launch.json
 .vscode/settings.json
 
+!doc
+!doc/**
+doc/MattDaemon\ 4.1.pdf
+
 !MattDaemon
 !MattDaemon/**
 MattDaemon/build
