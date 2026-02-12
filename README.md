@@ -10,7 +10,7 @@
 </div>
 
 <div align="center">
-  <img src="/MattDaemon.png">
+  <img src="/images/MattDaemon.jpg">
 </div>
 
 # Matt Daemon
